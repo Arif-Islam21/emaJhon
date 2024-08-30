@@ -23,7 +23,6 @@ const Shop = () => {
   //   }
   //   console.log(pages);
   const pages = [...Array(numberOfPages).keys()];
-  console.log(pages);
 
   /**
    * TODO 1: GET THE TOTAL NUMBER OF PRODUCT
