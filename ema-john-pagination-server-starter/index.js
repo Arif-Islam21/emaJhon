@@ -10,7 +10,7 @@ app.use(express.json());
 
 // emaJhon d1MPfRASXZM18LJS
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri =
   "mongodb+srv://emaJhon:d1MPfRASXZM18LJS@cluster0.knlt5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -38,6 +38,18 @@ async function run() {
         .skip(page * size)
         .limit(size)
         .toArray();
+      res.send(result);
+    });
+
+    app.post("/productsById", async (req, res) => {
+      const ids = req.body;
+      const idsWithObjectId = ids.map((id) => new ObjectId(id));
+      const query = {
+        _id: {
+          $in: idsWithObjectId,
+        },
+      };
+      const result = await productCollection.find(query).toArray();
       res.send(result);
     });
 
